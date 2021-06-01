@@ -11,7 +11,7 @@
 
 <body>
 
-    <form action="" method="post">
+    <form action="validar.php" method="post">
         <h1>Sistema de Login</h1> <br>
 
         <label for="">CORREO ELECTRONICO</label>
