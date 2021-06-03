@@ -1,14 +1,14 @@
 <?php
-include('db.php');
-$usuario=$_POST['usuario'];
+include'db.php';
+$correo=$_POST['correo'];
 $contraseña=$_POST['contraseña'];
 session_start();
-$_SESSION['usuario']=$usuario;
+$_SESSION['correo']=$correo;
 
 
 $conexion=mysqli_connect("localhost","root","","bd_registro");
 
-$consulta="SELECT*FROM usuarios where usuario='$usuario' and contraseña='$contraseña'";
+$consulta="SELECT * FROM usuarios where  correo='$correo' and contraseña='$contraseña'";
 $resultado=mysqli_query($conexion,$consulta);
 
 $filas=mysqli_num_rows($resultado);
@@ -20,7 +20,7 @@ if($filas){
 }else{
     ?>
     <?php
-    include("index.html");
+    include("index.php");
 
   ?>
   <h1 class="bad">ERROR DE AUTENTIFICACION</h1>
