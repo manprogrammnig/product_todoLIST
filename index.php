@@ -15,11 +15,11 @@
         <h1>Sistema de Login</h1> <br>
 
         <label for="">CORREO ELECTRONICO</label>
-        <input type="text" name="usuario" placeholder="COrreo electronico" required>
+        <input type="text" name="correo" placeholder="COrreo electronico" required>
         <label for="">CONTRASEÑA</label>
         <input type="password" name="contraseña" placeholder="Contraseña" required>
         <button type="submit">LOGIN</button>
-        <p> <a href=>REGISTRATE</a></p>
+        <p> <a href="registrarvista.php">REGISTRATE</a></p>
 
     </form>
 </body>
