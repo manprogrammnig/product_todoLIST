@@ -15,7 +15,7 @@ $filas=mysqli_num_rows($resultado);
 
 if($filas){
   
-    header(".php");
+    header("location:todo.php");
 
 }else{
     ?>
