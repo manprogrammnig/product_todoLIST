@@ -3,40 +3,92 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>TodoList</title>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Lista de tareas</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5"></script>
 </head>
 
-<body>
+<body background="grey">
+    <?php
+    session_start();
+    if (!isset($_SESSION['correo'])) {
+        header("location:index.php");
+    }
+    include('db.php');
+    ?>
+    <div class="alert alert">
+
+    </div>
 
     <div class="container">
         <header class="text-center text-light my-4">
             <h1 class="mb-4">Lista de tareas</h1>
-            <form class="search">
-                <input type="text" class="form-control m-auto" name="search" placeholder="busca tus tareas..">
-            </form>
+
+            <?php echo $_SESSION['correo']; ?>
         </header>
 
-        <ul class="list-group todos mx-auto text-light">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <input type="checkbox">
-                <span>comprar leche</span>
-                <i class="far fa-trash-alt delete"></i>
-                
-            </li>
-            
-            
-        </ul>
+        <div class="row justify-content-center">
+            <?php
+            $cod = $_SESSION['correo'];
+            $rs = mysqli_query($connexion, "SELECT U.id_usuario, U.usuario, T.id_tareas, T.nomtarea
+      FROM usuarios U INNER JOIN tareas T ON U.id_usuario = T.id_usuario WHERE correo = '$cod'");
+            ?>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>N° Tarea</th>
+                        <th>Tarea</th>
+                        <th>Nombre del usuario</th>
+                        <th colspan="2">Acción</th>
+                    </tr>
+                </thead>
+                <?php while ($registro = mysqli_fetch_array($rs)) { ?>
+                    <tr>
+                        <td><?php echo $registro['id_tareas']; ?></td>
+                        <td><?php echo $registro['nomtarea']; ?></td>
+                        <td><?php echo $registro['usuario']; ?></td>
+                        <?php $nombre = $registro['usuario']; ?>
 
-        <form class="add text-center my-4">
-            <label class="text-light">agregar nuevas tareas...</label>
-            <input type="text" class="form-control m-auto" name="add" placeholder="" />
-        </form>
+                        <td>
+                            <a href="editar.php?cod=<?php echo $registro['id_tareas']; ?>" class="btn btn-info">Editar</a>
+                            <a href="delete.php?cod=<?php echo $registro['id_tareas']; ?>" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+
+
+            </table>
+        </div>
+
+
+
+        <div class="row justify-content-center">
+            <form action="">
+                <input type="hidden" name="id" value="">
+                <div class="form-group">
+                    <label>tarea</label>
+                    <input type="text" name="nomb_tarea" class="form-control" value="" placeholder="tarea">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="crear">Crear</button>
+
+                </div>
+            </form>
+        </div>
     </div>
-   
+
+    <a href="index.php" class="btn btn-danger">Cerrar sesion</a>
+
+
+
 </body>
 
 </html>

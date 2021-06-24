@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="styles.css">
     <title>TodoList</title>
 </head>
+<style>
 
-<body>
+</style>
+
+<body  >
 
     <form action="validar.php" method="post">
         <h1>Sistema de Login</h1> <br>
