@@ -70,19 +70,13 @@
 
 
         <div class="row justify-content-center">
-            <form action="">
-                <input type="hidden" name="id" value="">
-                <div class="form-group">
-                    <label>tarea</label>
-                    <input type="text" name="nomb_tarea" class="form-control" value="" placeholder="tarea">
-                </div>
+            
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="crear">Crear</button>
+                <a href="crear.php" class="btn btn-info">Crear Tarea</a>
 
                 </div>
-            </form>
-        </div>
+           
     </div>
 
     <a href="index.php" class="btn btn-danger">Cerrar sesion</a>
